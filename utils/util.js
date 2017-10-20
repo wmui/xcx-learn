@@ -1,7 +1,7 @@
 const convertToStarsArray = function (stars) {
-  var num = stars.toString().substring(0, 1);
-  var array = [];
-  for (var i = 1; i <= 5; i++) {
+  let num = stars.toString().substring(0, 1);
+  let array = [];
+  for (let i = 1; i <= 5; i++) {
     if (i <= num) {
       array.push(1);
     }
@@ -27,7 +27,30 @@ const http = function (url, callback) {
     }
   })
 }
+// 人物姓名处理
+const convertToCastString = function(casts) {
+  let castsjoin = "";
+  for (let idx in casts) {
+    castsjoin = castsjoin + casts[idx].name + " / ";
+  }
+  return castsjoin.substring(0, castsjoin.length - 2);
+}
+
+const convertToCastInfos = function(casts) {
+  let castsArray = []
+  for (let idx in casts) {
+    let cast = {
+      img: casts[idx].avatars ? casts[idx].avatars.large : "",
+      name: casts[idx].name
+    }
+    castsArray.push(cast);
+  }
+  return castsArray;
+}
+
 export default {
   convertToStarsArray,
-  http
+  http,
+  convertToCastString,
+  convertToCastInfos
 }

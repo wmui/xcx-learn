@@ -89,5 +89,12 @@ Page({
       searchPanelShow: false,
       containerShow: true
     })
+  },
+  onMovieTap: function(event) {
+  let movieId = event.currentTarget.dataset.movieId
+  // 带参数的路由跳转
+  wx.navigateTo({
+    url: 'detail-movie/detail-movie?id='+movieId,
+  })
   }
 })

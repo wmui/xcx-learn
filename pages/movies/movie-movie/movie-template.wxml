@@ -1,6 +1,6 @@
 <import src="../movie-star/star-template.wxml" />
 <template name="movieTpl">
-  <view class='movie-container'>
+  <view class='movie-container' bindtap='onMovieTap' data-movie-id='{{movieId}}'>
       <image class='movie-img' src="{{coverageUrl}}"></image>
       <text class='movie-title'>{{title}}</text>
       <!-- 多数据传递 -->

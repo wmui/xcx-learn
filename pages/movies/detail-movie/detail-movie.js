@@ -1,5 +1,5 @@
-// pages/movies/detail-movie/detail-movie.js
-import utils from '../../../utils/util.js'
+// import utils from '../../../utils/util.js'
+import Movie from './class/Movie.js'
 let app = getApp()
 Page({
 
@@ -17,50 +17,18 @@ Page({
     let movieId = options.id
     // 请求电影详情数据
     let url = app.globalData.doubanBase +'/v2/movie/subject/'+movieId
-    utils.http(url,this.processData)
-  },
-  processData: function(data) {
-    // console.log(data)
-
-    if (!data) {
-      return;
-    }
-    let director = {
-      avatar: "",
-      name: "",
-      id: ""
-    }
-    if (data.directors[0] != null) {
-      if (data.directors[0].avatars != null) {
-        director.avatar = data.directors[0].avatars.large
-
-      }
-      director.name = data.directors[0].name;
-      director.id = data.directors[0].id;
-    }
-    let movie = {
-      movieImg: data.images ? data.images.large : "",
-      country: data.countries[0],
-      title: data.title,
-      originalTitle: data.original_title,
-      wishCount: data.wish_count,
-      commentCount: data.comments_count,
-      year: data.year,
-      generes: data.genres.join("、"),
-      stars: utils.convertToStarsArray(data.rating.stars),
-      score: data.rating.average,
-      director: director,
-      casts: utils.convertToCastString(data.casts),
-      castsInfo: utils.convertToCastInfos(data.casts),
-      summary: data.summary
-    }
-    this.setData({
-      movie: movie
+    // utils.http(url,this.processData)
+    // 对象方式
+    let movie = new Movie(url)
+    movie.getData((result) => {
+      this.setData({
+        movie: result
+     })
     })
   },
   // onReady: function() {
-  //   // 动态标题,异步出错
-  //   let title = this.movie.title
+  // console.log(this.movie)
+  //  let title = this.movie.title
   //   wx.setNavigationBarTitle({
   //     title: title
   //   })

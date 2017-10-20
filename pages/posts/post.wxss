@@ -1,0 +1,4 @@
+@import './post-item/post-item-template.wxss';
+.article {
+  background-color: #f3f3f3;
+}

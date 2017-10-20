@@ -1,0 +1,11 @@
+<import src="movie-list/list-template.wxml" />
+<view class='container'>
+  <view class='movies-template'>
+    <template is="listTpl" data="{{...inTheaters}}" />
+  </view>
+  <view class='movies-template'>
+    <template is="listTpl" data="{{...comingSoon}}" />
+  </view><view class='movies-template'>
+    <template is="listTpl" data="{{...top250}}" />
+  </view>
+</view>

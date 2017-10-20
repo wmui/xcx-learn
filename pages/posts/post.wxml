@@ -1,0 +1,18 @@
+<import src="./post-item/post-item-template.wxml" />
+<view class="article">
+  <swiper indicator-dots='true' autoplay='true' interval='2000'>
+    <block wx:for="{{imgUrls}}" wx:for-item="item" wx:for-index="index" wx:key="*this">
+      <swiper-item catchtap="onPostDetail" data-post-id="{{item.id}}">
+        <image src="{{item.pic}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <block wx:for="{{listData}}" wx:for-item="item" wx:for-index="index" wx:key="*this">
+    <!-- id是进入详情页的为一标识符 -->
+    <view catchtap="onPostDetail" data-post-id="{{item.id}}">
+      <!-- is是模板名字，data是数据 -->
+      <template is="postItem" data="{{...item}}" />
+    </view>
+  </block>
+</view>

@@ -1,0 +1,13 @@
+<template name="postItem">
+  <view class='article-list'>
+    <view class='article-header'>
+     <image src="{{avatar}}" class='avatar'></image> 
+     <text class='date'>{{date}} <text style="color:red"> {{index}}</text></text>
+    </view>
+    <view class='article-content'>
+      <text class='title'>{{title}}</text>
+      <image class="pic" src="{{pic}}"></image>
+      <text class='content'>{{content}}</text>
+    </view>
+  </view>
+</template>

@@ -26,7 +26,8 @@ Page({
       },
       method: 'GET',
       success: (res) => {
-        this.proccessData(res.data.subjects, keyApi, categoryTitle)
+        // 成功回掉函数
+        this.proccessData(res.data, keyApi, categoryTitle)
       },
       fail: (res) => {
         console.log(res)
@@ -37,8 +38,8 @@ Page({
   proccessData: function(data, keyApi, categoryTitle) {
     let movies = []
 
-    for(let key in data) {
-      let subject = data[key]
+    for (let key in data.subjects) {
+      let subject = data.subjects[key]
       let title = subject.title
       if(subject.title.length > 6) {
         title = subject.title.slice(0,6)+'...'
@@ -59,5 +60,11 @@ Page({
       movies: movies
     }
     this.setData(readyData)
+  },
+  onMoreMovies: function (event) {
+    let category = event.currentTarget.dataset.category
+    wx.navigateTo({
+      url: 'more-movie/more-movie?category=' + category
+    })
   }
 })

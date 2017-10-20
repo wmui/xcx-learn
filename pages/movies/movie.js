@@ -77,7 +77,7 @@ Page({
       searchResult: {}
     })
   },
-  onBindBlur: function(event){
+  onBindConfirm: function(event){
     // console.log(event.detail.value)
     // 开始搜索
     let text = event.detail.value

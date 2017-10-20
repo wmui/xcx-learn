@@ -1,12 +1,11 @@
 {
   "pages": [
+    "pages/welcome/welcome",
     "pages/posts/post",
     "pages/posts/post-detail/post-detail",
     "pages/movies/movie",
     "pages/movies/more-movie/more-movie",
-    "pages/movies/detail-movie/detail-movie",
-    "pages/welcome/welcome"
-    
+    "pages/movies/detail-movie/detail-movie"
   ],
   "window": {
     "navigationBarBackgroundColor": "#222"

@@ -4,7 +4,10 @@ Page({
   data: {
     inTheaters: {},
     comingSoon: {},
-    top250: {}
+    top250: {},
+    searchResult:{},
+    searchPanelShow: false,
+    containerShow: true
   },
   onLoad: function() {
     let inTheatersUrl = app.globalData.doubanBase +
@@ -53,7 +56,7 @@ Page({
       }
       movies.push(tmp)
     }
-    // console.log(movies)
+    // console.log(data)
     let readyData = {}
     readyData[keyApi] = {
       categoryTitle: categoryTitle,
@@ -65,6 +68,26 @@ Page({
     let category = event.currentTarget.dataset.category
     wx.navigateTo({
       url: 'more-movie/more-movie?category=' + category
+    })
+  },
+  onBindFocus: function() {
+    this.setData({
+      searchPanelShow: true,
+      containerShow: false,
+      searchResult: {}
+    })
+  },
+  onBindBlur: function(event){
+    // console.log(event.detail.value)
+    // 开始搜索
+    let text = event.detail.value
+    let searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + text
+    this.getData(searchUrl, 'searchResult', '搜索结果')
+  },
+  onCancelImgTap: function(){
+    this.setData({
+      searchPanelShow: false,
+      containerShow: true
     })
   }
 })

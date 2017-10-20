@@ -98,6 +98,7 @@ Page({
   onPullDownRefresh: function(){
     let url = this.data.requestUrl +
       "?star=0&count=20"
+    // 重置为默认值
     this.data.movies = []
     this.data.isEmpty = false
     this.data.totalCount = 0

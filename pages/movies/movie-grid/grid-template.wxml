@@ -1,5 +1,5 @@
 <import src="../movie-movie/movie-template.wxml" />
-<template name="movieGridTemplate">
+<template name="gridTpl">
   <view class="grid-container">
     <block wx:for="{{movies}}" wx:for-item="movie" wx:key="{{index}}">
       <view class="single-view-container">

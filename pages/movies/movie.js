@@ -27,7 +27,7 @@ Page({
       method: 'GET',
       success: (res) => {
         // 成功回掉函数
-        this.proccessData(res.data, keyApi, categoryTitle)
+        this.processData(res.data, keyApi, categoryTitle)
       },
       fail: (res) => {
         console.log(res)
@@ -35,7 +35,7 @@ Page({
     })
   },
   // 消息队列
-  proccessData: function(data, keyApi, categoryTitle) {
+  processData: function(data, keyApi, categoryTitle) {
     let movies = []
 
     for (let key in data.subjects) {

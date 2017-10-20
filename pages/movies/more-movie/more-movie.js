@@ -8,7 +8,10 @@ Page({
    */
   data: {
     categoryName:'',
-    movies: {}
+    movies: [],
+    isEmpty: false,
+    requestUrl: '',
+    totalCount: 0
   },
 
   /**
@@ -34,7 +37,8 @@ Page({
         dataUrl = app.globalData.doubanBase + "/v2/movie/top250";
         break;
     }
-    utils.http(dataUrl, this.proccessData)
+    this.data.requestUrl = dataUrl
+    utils.http(dataUrl, this.processData)
   },
 
   /**
@@ -46,8 +50,9 @@ Page({
       title: this.data.categoryName
     })
   },
-  proccessData: function (data) {
+  processData: function (data) {
     let movies = []
+    let that = this
     // console.log(data)
     for (let key in data.subjects) {
       let subject = data.subjects[key]
@@ -64,8 +69,39 @@ Page({
       }
       movies.push(tmp)
     }
+    
+    let totalMovies = []
+    if (this.data.isEmpty) {
+      totalMovies = movies
+      that.data.isEmpty = true
+    } else {
+      // 有数据
+      that.data.totalCount += 20
+      that.data.isEmpty = false
+      totalMovies = that.data.movies.concat(movies)
+    }
+    // console.log(that.data.totalCount)
     this.setData({
-      movies:movies
+      movies: totalMovies
     })
+    wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
+  },
+  // 上拉加载更多
+  onReachBottom: function() {
+    // console.log('scroll')
+    let url = this.data.requestUrl+'?start=' + this.data.totalCount + '&count=20'
+    utils.http(url, this.processData)
+    wx.showNavigationBarLoading()
+  },
+  // 下拉刷新
+  onPullDownRefresh: function(){
+    let url = this.data.requestUrl +
+      "?star=0&count=20"
+    this.data.movies = []
+    this.data.isEmpty = false
+    this.data.totalCount = 0
+    utils.http(url, this.processData)
+    wx.showNavigationBarLoading()
   }
 })
